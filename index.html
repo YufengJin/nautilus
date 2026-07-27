@@ -272,8 +272,40 @@
       font-weight: 600;
     }
 
+    /* BibTeX citation */
+    .bibtex-wrap { position: relative; max-width: 95%; margin: 0 auto; }
+    .bibtex-box {
+      background: #0f1a2b;
+      color: #e6edf3;
+      border-radius: 6px;
+      padding: 16px 18px;
+      font-family: "Menlo", "Consolas", monospace;
+      font-size: 0.88rem;
+      line-height: 1.55;
+      text-align: left;
+      overflow-x: auto;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.10);
+      margin: 0;
+    }
+    .bibtex-copy {
+      position: absolute;
+      top: 10px;
+      right: 12px;
+      background: rgba(255,255,255,0.10);
+      color: #c8d3df;
+      border: 1px solid rgba(255,255,255,0.20);
+      border-radius: 4px;
+      padding: 3px 10px;
+      font-size: 0.78rem;
+      font-family: "Google Sans", sans-serif;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+    .bibtex-copy:hover { background: rgba(255,255,255,0.20); color: #fff; }
+
     @media (max-width: 768px) {
       .pillar-row, .image-grid, .cost-grid { grid-template-columns: 1fr; }
+      .bibtex-box { font-size: 0.76rem; }
       .image-grid img,
       .image-grid video { height: 220px; }
       table.trust-table { font-size: 0.82rem; }
@@ -515,6 +547,25 @@
     </div>
   </section>
 
+  <section class="section" id="BibTeX" style="padding-top: 0;">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-full has-text-centered">
+          <h2 class="title is-4" style="font-weight: 700;">BibTeX</h2>
+          <div class="bibtex-wrap">
+            <button class="bibtex-copy" type="button" onclick="copyBibtex(this)">Copy</button>
+            <pre class="bibtex-box"><code id="bibtex-entry">@article{jin2026nautilus,
+  title={Nautilus: From One Prompt to Plug-and-Play Robot Learning},
+  author={Jin, Yufeng and Guo, Jianfei and Jia, Xiaogang and Deng, Yu and Li, Zechu and Liu, Han and Liao, Weiran and Prasad, Vignesh and Franzius, Mathias and Neumann, Gerhard and others},
+  journal={arXiv preprint arXiv:2605.11665},
+  year={2026}
+}</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <footer class="footer">
     <div class="container">
       <div class="columns is-centered">
@@ -529,6 +580,16 @@
       </div>
     </div>
   </footer>
+
+  <script>
+    function copyBibtex(btn) {
+      var text = document.getElementById('bibtex-entry').innerText;
+      navigator.clipboard.writeText(text).then(function () {
+        btn.textContent = 'Copied';
+        setTimeout(function () { btn.textContent = 'Copy'; }, 1500);
+      });
+    }
+  </script>
 
   <script defer src="./static/js/fontawesome.all.min.js"></script>
 </body>
